@@ -1,3 +1,12 @@
-FROM nginx
+FROM node:alpine
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY . /app
+
+WORKDIR /app
+RUN npm install 
+
+WORKDIR /app
+
+EXPOSE 4000
+
+CMD node server.js
