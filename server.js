@@ -12,8 +12,8 @@ const PORT = 4000;
 
 // Responds with code "429, Too many requests" if more than 100 requests are send within 10 minutes
 const limiter = rateLimit({
-    windowMs: 600000, 
-    max: 300, 
+    windowMs: 600000,
+    max: 300,
 });
 
 const proxy = createProxyMiddleware({
@@ -26,7 +26,15 @@ app.use(limiter);
 app.use(compression());
 app.use(cors());
 
-//Caching Middleware
+
+// Caching Middleware
+
+
+// For Testing
+app.use((req, res, next) => {
+    console.log(`Proxying: ${req.method} ${req.originalUrl}`);
+    next();
+});
 
 // Proxy Middleware
 app.use('/', proxy);
@@ -41,7 +49,7 @@ app.listen(PORT, () => {
 
 
 
-// Caching: 
+// Caching:
 
 // const NodeCache = require('node-cache');
 // const bodyParser = require('body-parser');
