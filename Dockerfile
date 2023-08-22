@@ -1,12 +1,23 @@
-FROM node:alpine
+FROM nginx:alpine
 
-COPY . /app
+COPY nginx.conf /etc/nginx/nginx.conf
 
-WORKDIR /app
-RUN npm install 
+EXPOSE 80
 
-WORKDIR /app
+CMD ["nginx", "-g", "daemon off;"]
 
-EXPOSE 4000
 
-CMD node server.js
+
+# Express Proxy:
+# FROM node:alpine
+
+# COPY . /app
+
+# WORKDIR /app
+# RUN npm install 
+
+# WORKDIR /app
+
+# EXPOSE 4000
+
+# CMD node server.js
